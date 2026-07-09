@@ -28,6 +28,7 @@ from homeassistant.components.light import (
     PLATFORM_SCHEMA as LIGHT_PLATFORM_SCHEMA,
     ColorMode,
     LightEntity,
+    LightEntityDescription,
     LightEntityFeature,
     filter_supported_color_modes,
 )
@@ -146,8 +147,13 @@ FORWARDED_ATTRIBUTES = frozenset(
 class LightGroup(GroupEntity, LightEntity):
     """Representation of a light group."""
 
+    entity_description = LightEntityDescription(
+        key="helper_grouped_light",
+        has_entity_name=True,
+        name=None,
+    )
+
     _attr_available = False
-    _attr_icon = "mdi:lightbulb-group"
     _attr_max_color_temp_kelvin = 6500
     _attr_min_color_temp_kelvin = 2000
     _attr_should_poll = False
